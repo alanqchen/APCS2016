@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class AnimalListAdvancedRunner {
+public class AnimalListMenuRunner {
 	static AnimalList list = new AnimalList();
 	private static Scanner input = new Scanner(System.in); 
 	public static void main(String[] args) {
