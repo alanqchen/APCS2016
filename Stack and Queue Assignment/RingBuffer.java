@@ -19,9 +19,16 @@ public class RingBuffer {
 	}
 	public boolean add(char ch) {
 		//should be a series of if loops, cases for wraped, non-wraped, empty, non-empty, and more.
-		if (isEmpty()) {
-				
+		if (rear - front == characters.length() - 1) {
+			return false;
+		} else if (front - rear == 1) {
+			return false;
 		}
-		return false
+		if (rear == characters.length() {
+			rear = 0;
+		}
+		characters[rear] = ch;
+		rear++;
+		return true;
 	}
 }
