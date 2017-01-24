@@ -11,7 +11,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 //import java.util.Queue;
 import java.util.Scanner;
-  
+/*
+ * CLASS FOR THE GAME
+ * generateDecks - takes 2 decks and adds the cards to the decks(random)
+ * shuffle - takes 2 decks and shuffles them
+ * pause - for pausing
+ * play - method that will be called by the main method
+ * game - called by the play method, handles the drawing of the card, comparing, etc.
+ * getTurns - returns the number of turns (not used?)
+ * getp1Wins - returns the number of player 1 wins
+ * getp2Wins - returns the number of player 2 wins
+ * Note about getp1/2Wins - Will always return 0 or 1. These are used for the 3rd option in the menu 
+ */
 public class WarGame { 
 	//private QueueList<Integer> deck1;
 	//private QueueList<Integer> deck2;
@@ -60,13 +71,13 @@ public class WarGame {
     	}
     	pause();
     }
-	private static void pause() {
-		System.out.println("Press ENTER to continue...");
-		try {
-			System.in.read();
-		} catch (IOException e) {
-		}
+    private static void pause() {
+	System.out.println("Press ENTER to continue...");
+	try {
+		System.in.read();
+	} catch (IOException e) {
 	}
+    }
     public static int play(boolean steps, boolean result) {
 	p1win = 0;
 	p2win = 0;
@@ -159,6 +170,15 @@ public class WarGame {
     public int getp2Wins() {
 	return p2wins;
     }
+    /* 
+     * MAIN METHOD
+     * Has the looping menu
+     * 1. Play War (with steps) - Starts a game of war, doing it step-by-step
+     * 2. Play War (without steps) - Starts a game of war, without doing step-by-step
+     * 3. Simulate several games - User enters number of times they want to simulate, and then displays
+     *    average number of turns to finsih game, and then the number of wins from both player 1 and player 2
+     * 4. Quit - Terminates program
+     */
     private static Scanner input = new Scanner(System.in); 
     public static void main(String[] args) {
     	int menu = 0;
