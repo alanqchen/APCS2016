@@ -65,7 +65,7 @@ public class WarGame {
 		} catch (IOException e) {
 		}
 	}
-    public static int play(boolean steps) {
+    public static int play(boolean steps, boolean result) {
     	QueueList<Integer> deck1 = new QueueList<Integer>();
     	QueueList<Integer> deck2 = new QueueList<Integer>();
     	QueueList<Integer> placed = new QueueList<Integer>();
@@ -88,12 +88,12 @@ public class WarGame {
     		game(placed, deck1, deck2, steps);
     	}
     	if (deck1.isEmpty())
-    		if (steps) {
+    		if (result) {
     			System.out.println("Player 2 Won!!! In " + turnnum + " turns!"); 
     			pause();
     		}
     	if (deck2.isEmpty())
-    		if (steps) {
+    		if (result) {
     			System.out.println("Player 1 Won!!! In " + turnnum + " turns!");
     			pause();
     		}
@@ -164,13 +164,13 @@ public class WarGame {
 			menu = input.nextInt();
 				if (menu == 1) {
 					System.out.println("Starting game...");
-					play(true);
+					play(true, true);
 				}
 				if (menu == 2) {
-					play(false);
+					play(false, true);
 				}
 				if (menu == 3) {
-
+					System.out.println();
 				}
 		} while (menu != 4);
     }
