@@ -1,6 +1,10 @@
 /**
-*
-**/
+ * Alan Chen - APCompSci 2017
+ * Project: Linked Lists
+ * Date started: 1/22/2017
+ * Notes: This is a BONUS assingment!
+ * TODO: Document
+ */
 // with thanks to Matt Ferraro
 
 import java.io.IOException;
