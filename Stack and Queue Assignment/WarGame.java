@@ -150,7 +150,7 @@ public class WarGame {
     private static Scanner input = new Scanner(System.in); 
     public static void main(String[] args)
     {
-    	int menu=0;
+    	int menu = 0;
 		do {
 			System.out.println("");
 			System.out.println("#============== Animal List AR ===============#");
@@ -170,7 +170,16 @@ public class WarGame {
 					play(false, true);
 				}
 				if (menu == 3) {
-					System.out.println();
+					System.out.println("How many times would to simulate war? ");
+					int count = input.nextInt();
+					int turns = 0;
+					int i = 0;
+					while(i < count) {
+						turns += play(false, false);
+						i++;
+					}
+					int average = turns / count;
+					System.out.println("Average turns to win: " + turns):
 				}
 		} while (menu != 4);
     }
