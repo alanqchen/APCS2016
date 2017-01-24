@@ -164,12 +164,12 @@ public class WarGame {
     	int menu = 0;
 		do {
 			System.out.println("");
-			System.out.println("#============== Animal List AR ===============#");
-			System.out.println("|1. Play War (with steps)                     |");
-			System.out.println("|2. Play War (without steps)                  |");
-			System.out.println("|3. Simulate several games                    |");
-			System.out.println("|4. Quit									  |");
-			System.out.println("#=============================================#");
+			System.out.println("#============== War Card Game ===============#");
+			System.out.println("|1. Play War (with steps)                    |");
+			System.out.println("|2. Play War (without steps)                 |");
+			System.out.println("|3. Simulate several games                   |");
+			System.out.println("|4. Quit	                                 |");
+			System.out.println("#============================================#");
 			System.out.println("");
 			System.out.print("Please choose a selection: ");
 			menu = input.nextInt();
