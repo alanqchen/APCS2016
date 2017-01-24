@@ -26,6 +26,7 @@ import java.util.Scanner;
 public class WarGame { 
 	//private QueueList<Integer> deck1;
 	//private QueueList<Integer> deck2;
+	private static boolean war;
     private static int p1win;
     private static int p2win;
     private static int turnnum;
@@ -50,7 +51,7 @@ public class WarGame {
     }
     public static void shuffle(QueueList<Integer> deck1, QueueList<Integer> deck2, boolean steps) {
     	if (steps)
-    		System.out.println("Reached 5000 turns - Shuffling!");
+    		System.out.println("Possible Stalemate - Shuffling!");
     	ArrayList<Integer> bigDeck1 = new ArrayList<Integer>();
     	ArrayList<Integer> bigDeck2 = new ArrayList<Integer>();
     	//System.out.println("Deck 1 has: ");
@@ -69,19 +70,22 @@ public class WarGame {
     	while (!bigDeck2.isEmpty()) {
     		deck2.add(bigDeck2.remove((int)(Math.random()*bigDeck2.size())));
     	}
-	//if (steps)
-    		pause();
+    	pause(steps);
     }
-    private static void pause() {
-	System.out.println("Press ENTER to continue...");
-	try {
-		System.in.read();
-	} catch (IOException e) {
-	}
+    private static void pause(boolean steps) {
+    	if (!steps) {
+    		return;
+    	} else {
+    		System.out.println("Press ENTER to continue...");
+    		try {
+    			System.in.read();
+    		} catch (IOException e) {
+    		}
+    	}
     }
     public static int play(boolean steps, boolean result) {
-	p1win = 0;
-	p2win = 0;
+    	p1win = 0;
+    	p2win = 0;
     	QueueList<Integer> deck1 = new QueueList<Integer>();
     	QueueList<Integer> deck2 = new QueueList<Integer>();
     	QueueList<Integer> placed = new QueueList<Integer>();
@@ -96,56 +100,64 @@ public class WarGame {
     	//continuegame = true;
     	//System.out.println("In the play method");
     	while (!(deck1.isEmpty() || deck2.isEmpty())) {
-        	if (turnnum == 5000 && !(deck1.isEmpty() || deck2.isEmpty())) {
+        	if (turnnum != 0 && (turnnum % 2500) == 0 && !(deck1.isEmpty() || deck2.isEmpty())) {
         		//turnnum++;
         		shuffle(deck1, deck2, steps);
         	}
     		turnnum++;
-    		game(placed, deck1, deck2, steps);
+    		game(placed, deck1, deck2, steps, result);
+    		pause(steps);
     	}
-    	if (deck1.isEmpty())
+    	if (deck1.isEmpty()) {
     		if (result) {
     			System.out.println("Player 2 Won!!! In " + turnnum + " turns!"); 
-    			pause();
+    			pause(steps);
     		}
 	        p2win++;
-    	if (deck2.isEmpty())
+    	} if (deck2.isEmpty()) {
     		if (result) {
     			System.out.println("Player 1 Won!!! In " + turnnum + " turns!");
-    			pause();
+    			pause(steps);
     		}
 	        p1win++;
+    	}
     	return turnnum;
     }
-    public static void game(QueueList<Integer> placed, QueueList<Integer> deck1, QueueList<Integer> deck2, boolean steps) {
+    public static void game(QueueList<Integer> placed, QueueList<Integer> deck1, QueueList<Integer> deck2, boolean steps, boolean result) {
     	int card1 = deck1.remove();
     	int card2 = deck2.remove();
-    	if (steps) {
-    		System.out.println("---------------\nPlayer 1's card: " + card1);
+    	if (result) {
+    		if (!war) {
+    			System.out.println("---------------\nPlayer 1's card: " + card1);
+    		} else {
+    			System.out.println("Player 1's card: " + card1);
+    		}
     		System.out.println("Player 2's card: " + card2);
+    		war = false;
     	}
     	placed.add(card1);
     	placed.add(card2);
     	if (card1 > card2) {
-    		if (steps) {
+    		if (result) {
     			System.out.println("Player 1 gets cards!\n---------------");
-    			pause();
+    			//pause(steps);
     		}
     		while (!placed.isEmpty()) {
     			deck1.add((Integer) placed.remove());
     		}
     	} else if (card1 < card2) {
-    		if (steps) {
+    		if (result) {
     			System.out.println("Player 2 gets cards!\n---------------");
-    			pause();
+    			//pause(steps);
     		}
     		while (!placed.isEmpty()) {
     			deck2.add((Integer) placed.remove());
     		}
     	} else {
-    		if (steps) {
+    		if (result) {
+    			war = true;
     			System.out.println("Cards are the same! - WAR!");
-    			System.out.println("Placing cards....");
+    			System.out.println("Placing 3 cards facedown....");
     		}
     		int i = 0;
     		while (i < 3 && !(deck1.isEmpty() || deck2.isEmpty())) {
@@ -154,22 +166,25 @@ public class WarGame {
     			placed.add((Integer) deck2.remove());
     			i++;
     		}
-    		if (i == 3 && !(deck1.isEmpty() || deck2.isEmpty()))
-    			game(placed, deck1, deck2, steps);
-    		else
-    			if (steps)
-    				System.out.println("Player's deck empty while placing!");
-    			return;
+    		if (i == 3 && !(deck1.isEmpty() || deck2.isEmpty())) {
+    			game(placed, deck1, deck2, steps, result);
+    		} else if (result) {
+    			System.out.println("Player's deck empty while placing!");
+    			war = false;
+    		}
+    		return;
     	}
     }
     public int getTurns() {
     	return turnnum;
     }
-    public int getp1Wins() {
-	return p1wins;
+    public static int getp1Wins() {
+    	//System.out.println(p1win);
+    	return p1win;
     }
-    public int getp2Wins() {
-	return p2wins;
+    public static int getp2Wins() {
+    	//System.out.println(p2win);
+    	return p2win;
     }
     /* 
      * MAIN METHOD
@@ -185,12 +200,12 @@ public class WarGame {
     	int menu = 0;
 		do {
 			System.out.println("");
-			System.out.println("#========== War Card Game (BONUS) ===========#");
-			System.out.println("|1. Play War (with steps)                    |");
-			System.out.println("|2. Play War (without steps)                 |");
-			System.out.println("|3. Simulate several games                   |");
-			System.out.println("|4. Quit	                                 |");
-			System.out.println("#============================================#");
+			System.out.println("#============== War Card Game (BONUS) ===============#");
+			System.out.println("|1. Play War (with steps)                            |");
+			System.out.println("|2. Play War (without steps)                         |");
+			System.out.println("|3. Simulate several games                           |");
+			System.out.println("|4. Quit                                             |");
+			System.out.println("#====================================================#");
 			System.out.println("");
 			System.out.print("Please choose a selection: ");
 			menu = input.nextInt();
@@ -202,20 +217,41 @@ public class WarGame {
 				play(false, true);
 			}
 			if (menu == 3) {
-				System.out.println("How many times would to simulate war? ");
+				System.out.print("How many times to simulate war? ");
 				int count = input.nextInt();
-				int turns = 0;
-				int p1 = 0;
-				int p2 = 0;
-				int i = 0;
-				while(i < count) {
-					turns += play(false, false);
-					p1 += getp1Wins();
-					p2 += getp2Wins();
-					i++;
+				if (count == 0) {
+					System.out.println("0?! Really!?");
+				} else {
+					int turns = 0;
+					int p1 = 0;
+					int p2 = 0;
+					int i = 0;
+					while(i < count) {
+						turns += play(false, false);
+						p1 += getp1Wins();
+						p2 += getp2Wins();
+						i++;
+					}
+					int average = turns / count;
+					String line1 = "#======================= Info =======================#";
+					String line2 = "\n| Average number of turns to win: " + average;
+					String line3 = "\n| Number of Player 1 wins: " + p1;
+					String line4 = "\n| Number of Player 2 wins: " + p2;
+					String line5 = "\n#====================================================#";
+					while (line2.length() < line1.length() - 1) {
+						line2 += " ";
+					}
+					while (line3.length() < line1.length() - 1) {
+						line3 += " ";
+					}
+					while (line4.length() < line1.length() - 1) {
+						line4 += " ";
+					}
+					line2 += " |";
+					line3 += " |";
+					line4 += " |";
+					System.out.println(line1 + line2 + line3 + line4 + line5);
 				}
-				int average = turns / count;
-				System.out.println("#========================#\nAverage turns to win: " + turns + "\nNumber of Player 1 wins: " + p1 + "\nNumber of Player 2 wins: " + p2 + "\n#========================#");
 			}
 		} while (menu != 4);
 	}
