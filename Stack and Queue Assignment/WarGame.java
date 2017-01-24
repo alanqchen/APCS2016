@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class WarGame { 
 	//private QueueList<Integer> deck1;
 	//private QueueList<Integer> deck2;
+    private static int p1win;
+    private static int p2win;
     private static int turnnum;
     //private boolean continuegame;
     public static void generateDecks(int deckSize, QueueList<Integer> deck1, QueueList<Integer> deck2)
@@ -66,6 +68,8 @@ public class WarGame {
 		}
 	}
     public static int play(boolean steps, boolean result) {
+	p1win = 0;
+	p2win = 0;
     	QueueList<Integer> deck1 = new QueueList<Integer>();
     	QueueList<Integer> deck2 = new QueueList<Integer>();
     	QueueList<Integer> placed = new QueueList<Integer>();
@@ -92,11 +96,13 @@ public class WarGame {
     			System.out.println("Player 2 Won!!! In " + turnnum + " turns!"); 
     			pause();
     		}
+	        p2win++;
     	if (deck2.isEmpty())
     		if (result) {
     			System.out.println("Player 1 Won!!! In " + turnnum + " turns!");
     			pause();
     		}
+	        p1win++;
     	return turnnum;
     }
     public static void game(QueueList<Integer> placed, QueueList<Integer> deck1, QueueList<Integer> deck2, boolean steps) {
@@ -147,9 +153,14 @@ public class WarGame {
     public int getTurns() {
     	return turnnum;
     }
+    public int getp1Wins() {
+	return p1wins;
+    }
+    public int getp2Wins() {
+	return p2wins;
+    }
     private static Scanner input = new Scanner(System.in); 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
     	int menu = 0;
 		do {
 			System.out.println("");
@@ -162,25 +173,29 @@ public class WarGame {
 			System.out.println("");
 			System.out.print("Please choose a selection: ");
 			menu = input.nextInt();
-				if (menu == 1) {
-					System.out.println("Starting game...");
-					play(true, true);
+			if (menu == 1) {
+				System.out.println("Starting game...");
+				play(true, true);
+			}
+			if (menu == 2) {
+				play(false, true);
+			}
+			if (menu == 3) {
+				System.out.println("How many times would to simulate war? ");
+				int count = input.nextInt();
+				int turns = 0;
+				int p1 = 0;
+				int p2 = 0;
+				int i = 0;
+				while(i < count) {
+					turns += play(false, false);
+					p1 += getp1Wins();
+					p2 += getp2Wins();
+					i++;
 				}
-				if (menu == 2) {
-					play(false, true);
-				}
-				if (menu == 3) {
-					System.out.println("How many times would to simulate war? ");
-					int count = input.nextInt();
-					int turns = 0;
-					int i = 0;
-					while(i < count) {
-						turns += play(false, false);
-						i++;
-					}
-					int average = turns / count;
-					System.out.println("Average turns to win: " + turns):
-				}
+				int average = turns / count;
+				System.out.println("#========================#\nAverage turns to win: " + turns + "\nNumber of Player 1 wins: " + p1 + "\nNumber of Player 2 wins: " + p2 + "\n#========================#");
+			}
 		} while (menu != 4);
-    }
+	}
 }
