@@ -55,21 +55,22 @@ public class WarGame {
     	ArrayList<Integer> bigDeck2 = new ArrayList<Integer>();
     	//System.out.println("Deck 1 has: ");
     	while (!deck1.isEmpty()) {
-    		System.out.println(bigDeck1.add((Integer) deck1.remove()));
+    		bigDeck1.add((Integer) deck1.remove());
     	}
     	//System.out.println("Deck 2 has: ");
     	while (!deck2.isEmpty()) {
-    		System.out.println(bigDeck2.add((Integer) deck2.remove()));
+    		bigDeck2.add((Integer) deck2.remove());
     	}
     	//System.out.println("Adding to Deck 1: ");
     	while (!bigDeck1.isEmpty()) {
-    		System.out.println(deck1.add(bigDeck1.remove((int)(Math.random()*bigDeck1.size()))));
+    		deck1.add(bigDeck1.remove((int)(Math.random()*bigDeck1.size())));
     	}
     	//System.out.println("Adding to Deck 2: ");
     	while (!bigDeck2.isEmpty()) {
-    		System.out.println(deck2.add(bigDeck2.remove((int)(Math.random()*bigDeck2.size()))));
+    		deck2.add(bigDeck2.remove((int)(Math.random()*bigDeck2.size())));
     	}
-    	pause();
+	//if (steps)
+    		pause();
     }
     private static void pause() {
 	System.out.println("Press ENTER to continue...");
