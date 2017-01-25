@@ -1,4 +1,9 @@
-
+/**
+ * Alan Chen - APCompSci 2017
+ * Project: Linked Lists
+ * Date started: 1/21/2017
+ * TODO: Document and test
+ */
 public class RingBuffer {
 	private char[] characters;
 	private int front;
@@ -18,18 +23,20 @@ public class RingBuffer {
 		rear = 0;
 	}
 	public boolean add(char ch) {
-		System.out.println(characters.length);
+		//System.out.println(characters.length);
 		//should be a series of if loops, cases for wraped, non-wraped, empty, non-empty, and more.
 		if (rear - front == characters.length - 1) {
 			return false;
 		} else if (front - rear == 1) {
 			return false;
 		}
-		if (rear == characters.length - 1) {
-			rear = 0;
-		}
 		characters[rear] = ch;
 		rear++;
+		if (rear == characters.length) {
+			rear = 0;
+		}
+		//characters[rear] = ch;
+		//rear++;
 		return true;
 	}
 	public char remove() {
@@ -37,11 +44,10 @@ public class RingBuffer {
 			return ' ';
 		}
 		char temp = characters[front];
+		front++;
 		if(front == characters.length) {
 			front = 0;
-		} else {
-			front++;
-		}
+		} 
 		return temp;
 	}
 	public char peek() {
