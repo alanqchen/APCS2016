@@ -1,4 +1,9 @@
-
+/**
+ * Alan Chen - APCompSci 2017
+ * Project: Linked Lists
+ * Date started: 1/21/2017
+ * TODO: Document
+ */
 import java.util.Scanner;
 public class StackListClient {
 	private static StackList list = new StackList();
@@ -7,7 +12,7 @@ public class StackListClient {
 		int menu=0;
 		do {
 			System.out.println("#======= Stack List Client =======#");
-			System.out.println("|1. Enter Sentence                |");
+			System.out.println("|1. Enter Sentence/Replace Word   |");
 			System.out.println("|2. McKeen's Test Case            |");
 			System.out.println("|3. Quit                          |");
 			System.out.println("#=================================#");
@@ -16,7 +21,7 @@ public class StackListClient {
 				if (menu == 1) {
 					String convert;
 					String split = "";
-					System.out.print("Enter a sentence: ");
+					System.out.print("Enter a sentence(ended with a period): ");
 					//consumes line
 					input.nextLine();
 					String s1 = input.nextLine();
@@ -38,9 +43,9 @@ public class StackListClient {
 						System.out.println(list.pop());
 					}
 					*/
-					System.out.print("Please enter the word to be found: ");
+					System.out.print("Please enter the word to be found(case sensitive): ");
 					String find = input.next();
-					System.out.print("Please enter the replacement word: ");
+					System.out.print("Please enter the replacement word(case sensitive): ");
 					String replace = input.next();
 					String test;
 					StackList temp = list;
@@ -68,7 +73,11 @@ public class StackListClient {
 					}
 					System.out.println("The new sentence: " + display);
 				} else if (menu == 2) {
-          
+					/*
+					 * ENTER CODE HERE
+					 * 
+					 * 
+					 */
 				}
 		}while (menu != 3);
 	}
