@@ -6,8 +6,6 @@
  * TODO: DOONNNNEEE!
  */
 // with thanks to Matt Ferraro
-
-import java.io.IOException;
 import java.util.ArrayList;
 //import java.util.Queue;
 import java.util.Scanner;
@@ -64,8 +62,11 @@ public class WarGame {
      * takes 2 decks and shuffles them
      */
     public static void shuffle(QueueList<Integer> deck1, QueueList<Integer> deck2, boolean steps, boolean result) {
-    	if (result)
-    		System.out.println("Possible Stalemate - Shuffling!");
+    	if (result) {
+    		System.out.println("#============== Shuffling ==============#");
+    		System.out.println("| Possible Stalemate - Shuffling Decks! |");
+    		System.out.println("#=======================================#");
+    	}
     	//Two bigDecks to not mix up the cards from each player's deck
     	ArrayList<Integer> bigDeck1 = new ArrayList<Integer>();
     	ArrayList<Integer> bigDeck2 = new ArrayList<Integer>();
@@ -174,7 +175,7 @@ public class WarGame {
     	if (result) {
     		//if there is not a war, adds the divider line
     		if (!war) {
-    			System.out.println("-------------------------\nTurn " + turnnum + "\nPlayer 1's card: " + card1);
+    			System.out.println("------------------------------\nTurn " + turnnum + "\nPlayer 1's card: " + card1);
     		} else {
     			System.out.println("Player 1's card: " + card1);
     		}
@@ -187,7 +188,7 @@ public class WarGame {
     	//is card1 larger than card2?
     	if (card1 > card2) {
     		if (result) {
-    			System.out.println("Player 1 gets cards!\n-------------------------");
+    			System.out.println("Player 1 gets cards!\n------------------------------");
     		}
     		//gives player 1 the cards
     		while (!placed.isEmpty()) {
@@ -196,7 +197,7 @@ public class WarGame {
     	//is card2 larger than card3?
     	} else if (card1 < card2) {
     		if (result) {
-    			System.out.println("Player 2 gets cards!\n-------------------------");
+    			System.out.println("Player 2 gets cards!\n------------------------------");
     		}
     		//gives player 2 the cards
     		while (!placed.isEmpty()) {
@@ -246,8 +247,8 @@ public class WarGame {
     /* 
      * MAIN METHOD
      * Has the looping menu
-     * 1. Play War (with steps) - Starts a game of war, doing it step-by-step
-     * 2. Play War (without steps) - Starts a game of war, without doing step-by-step <- (poor wording?)
+     * 1. Play War (with pauses) - Starts a game of war, doing it step-by-step
+     * 2. Play War (without pauses) - Starts a game of war, without doing step-by-step 
      * 3. Simulate several games - User enters number of times they want to simulate, and then displays
      *    average number of turns to finish game, and the number of wins from both player 1 and player 2
      * 4. Quit - Terminates program
@@ -259,8 +260,8 @@ public class WarGame {
 			//display menu
 			System.out.println("");
 			System.out.println("#=================== War Card Game (BONUS) ====================#");
-			System.out.println("|1. Play War (with steps)                                      |");
-			System.out.println("|2. Play War (without steps)                                   |");
+			System.out.println("|1. Play War (with pauses)                                     |");
+			System.out.println("|2. Play War (without pauses)                                  |");
 			System.out.println("|3. Simulate several games                                     |");
 			System.out.println("|4. Quit                                                       |");
 			System.out.println("#==============================================================#");
@@ -268,7 +269,7 @@ public class WarGame {
 			System.out.print("Please choose a selection: ");
 			menu = input.nextInt();
 			/*
-			 * -=PLAY WAR (WITH STEPS)=-
+			 * -=PLAY WAR (WITH PAUSES)=-
 			 * plays war, step-by-step (with pauses)
 			 * steps: true
 			 * result: true
@@ -278,7 +279,7 @@ public class WarGame {
 				play(true, true);
 			}
 			/*
-			 * -=PLAY WAR (WITHOUT STEPS)=-
+			 * -=PLAY WAR (WITHOUT PAUSES)=-
 			 * plays war, without the pauses
 			 * steps: false
 			 * result: true
@@ -352,5 +353,6 @@ public class WarGame {
 				}
 			}
 		} while (menu != 4);
+		System.out.println("Have a nice day!");
 	}
 }
