@@ -1,3 +1,9 @@
+/**
+ * Alan Chen - APCompSci 2017
+ * Project: Linked Lists
+ * Date started: 1/20/2017
+ * TODO: DONE
+ */
 import java.util.LinkedList;
 
 public class QueueList<E> {
