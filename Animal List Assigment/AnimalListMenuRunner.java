@@ -7,7 +7,7 @@ public class AnimalListMenuRunner {
 		int menu=0;
 		do {
 			System.out.println("");
-			System.out.println("#============== Animal List AR ===============#");
+			System.out.println("#============== Animal List MR ===============#");
 			System.out.println("|1. Add animal to list                        |");
 			System.out.println("|2. Remove animal from list                   |");
 			System.out.println("|3. Display the list                          |");
