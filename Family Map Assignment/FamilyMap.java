@@ -101,6 +101,7 @@ public class FamilyMap {
 		}
 	}
 	public String[] commonFirst(String famname1,String famename2) {
+		String [] result;
 		TreeSet<String> test1 = fm.get(famname1);
 		TreeSet<String> test2 = fm.get(famname1);
 		if (test1.equals(null) && test2.equals(null)) {
@@ -115,12 +116,23 @@ public class FamilyMap {
 		}
 		int size1 = test1.size();
 		int size2 = test2.size();
+		TreeSet<String> test3;
+		TreeSet<String> test4;
+		TreeSet<String> test5 = new TreeSet<String>();
 		if (size1 >= size2) {
-			for (String first : test1) {
-				
-			}
+			test3 = test1;
+			test4 = test2;
 		} else {
-			
+			test3 = test2;
+			test4 = test1;
 		}
+		test4.retainAll(test3);
+		result = new String[test4.size()];
+		int count = 0;
+		for (String first : test4) {
+			result[count] = first;
+			count++;
+		}
+		return result;
 	}
 }
