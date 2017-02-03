@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 public class FamilyMap {
 	private TreeMap<String,TreeSet<String>> fm;
 	private static Scanner input = new Scanner(System.in); 
@@ -77,13 +78,13 @@ public class FamilyMap {
 		String result;
 		TreeSet<String> test1 = fm.get(famname1);
 		TreeSet<String> test2 = fm.get(famname1);
-		if (test1.equals(null) && test2.equals(null)) {
+		if (test1 == null && test2 == null) {
 			result = "ERROR: There are no family's with the last names " + test1 + " and " + test2 + "!";
 			return result;
-		} else if(test1.equals(null)) {
+		} else if(test1 == null) {
 			result = "ERROR: There is no family with the last name " + test1 + "!";
 			return result;
-		} else if(test2.equals(null)) {
+		} else if(test2 == null) {
 			result = "ERROR: There is no family with the last name " + test2 + "!";
 			return result;
 		}
@@ -100,17 +101,17 @@ public class FamilyMap {
 			return result;
 		}
 	}
-	public String[] commonFirst(String famname1,String famename2) {
+	public String[] commonFirst(String famname1,String famname2) {
 		String [] result;
 		TreeSet<String> test1 = fm.get(famname1);
-		TreeSet<String> test2 = fm.get(famname1);
-		if (test1.equals(null) && test2.equals(null)) {
-			System.out.println("ERROR: There are no family's with the last names " + test1 + " and " + test2 + "!");
+		TreeSet<String> test2 = fm.get(famname2);
+		if (test1 == null && test2 == null) {
+			System.out.println("ERROR: There are no family's with the last names " + famname1 + " and " + famname2 + "!");
 			return null;
-		} else if(test1.equals(null)) {
+		} else if(test1 == null) {
 			System.out.println("ERROR: There is no family with the last name " + test1 + "!");
 			return null;
-		} else if(test2.equals(null)) {
+		} else if(test2 == null) {
 			System.out.println("ERROR: There is no family with the last name " + test2 + "!");
 			return null;
 		}
@@ -134,5 +135,21 @@ public class FamilyMap {
 			count++;
 		}
 		return result;
+	}
+	public String[] longestName(String famname) {
+		String[] result = new String[0];
+		return result;
+	}
+	public boolean exists(String famname) {
+		if (fm.get(famname) == null)
+			return false;
+		else
+			return true;
+	}
+	public void display() {
+		Set<String> list = fm.keySet();
+		for (String a : list) {
+			System.out.println("|Key: " + a + " |Value: " + fm.get(a) + " |");
+		}
 	}
 }
