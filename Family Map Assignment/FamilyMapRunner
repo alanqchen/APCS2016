@@ -1,0 +1,18 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class FamilyMapRunner {
+
+	public static void main(String[] args) {
+		/* Add family */
+		System.out.println("ADD FAMILY TEST - NO PARAM (2x)");
+		FamilyMap fm = new FamilyMap();
+		fm.addFamily();
+		fm.addFamily();
+		fm.display();
+		System.out.println("ADD FAMILY TEST - PARAM (1x)");
+		ArrayList<String> fam1 = new ArrayList(Arrays.asList("james", "john","thomas"));
+		fm.addFamily("Smith",fam1);
+		fm.display();
+	}
+}
