@@ -25,10 +25,10 @@ public class FamilyMap {
 		TreeSet<String> fs = new TreeSet<String>();
 		while (!first.equals("!")) {
 			if (count != 1)
-				System.out.print("Please enter first name #" + count);
+				System.out.print("Please enter first name #" + count + ": ");
 			first = input.next();
 			if (!first.equals("!")) {
-				System.out.println("Added " + first);
+				//System.out.println("Added " + first);
 				fs.add(first);
 				count++;
 			}
@@ -137,7 +137,57 @@ public class FamilyMap {
 		return result;
 	}
 	public String[] longestName(String famname) {
-		String[] result = new String[0];
+		String[] result;
+		TreeSet<String> test = fm.get(famname);
+		if (test == null) {
+			System.out.println("ERROR: There is no family with the last name " + test + "!");
+			return null;
+		}
+		int length;
+		int store = 0;
+		for (String a : test) {
+			length = a.length();
+			if (length > store) {
+				store = length;
+			}
+		}
+		int count = 0;
+		for (String a : test) {
+			length = a.length();
+			if (length == store) {
+				count++;
+			}
+		}
+		result = new String[count];
+		int counter = 0;
+		for (String a : test) {
+			length = a.length();
+			if (length == store) {
+				result[counter] = a;
+				count++;
+			}
+		}
+		return result;
+	}
+	public String[] listAll() {
+		ArrayList<String> list = new ArrayList<String>();
+		String[] result;
+		TreeSet<String> keyset = (TreeSet<String>) fm.keySet();
+		TreeSet<String> valueset;
+		String name;
+		for (String last : keyset) {
+			valueset = fm.get(last);
+			for (String first : valueset) {
+				name = last + ", " + first;
+				list.add(name);
+			}
+		}
+		result = new String[list.size()];
+		int count = 0;
+		for (String a : list) {
+			result[count] = a;
+			count++;
+		}
 		return result;
 	}
 	public boolean exists(String famname) {
