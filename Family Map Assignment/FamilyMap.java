@@ -239,6 +239,7 @@ public class FamilyMap {
 				counter++;
 			}
 		}
+		//returns the result
 		return result;
 	}
 	/* Lists all names in the Map */
