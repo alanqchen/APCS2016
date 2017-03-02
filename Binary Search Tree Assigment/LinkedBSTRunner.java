@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class BSTRunner {
+public class LinkedBSTRunner {
     private static Scanner input = new Scanner(System.in); 
 	public static void main(String[] args) {
 		List display = new ArrayList();
@@ -38,7 +38,9 @@ public class BSTRunner {
 			System.out.println("|3. Inorder Traversal                                       |");
 			System.out.println("|4. Postorder Traversal                                     |");
 			System.out.println("|5. Remove a node (Coming Soon)                             |");
-			System.out.println("|6. Quit                                                    |");
+			System.out.println("|6. Search the tree for a node                              |");
+			System.out.println("|7. Count the number of leafs in the tree                   |");
+			System.out.println("|8. Quit                                                    |");
 			System.out.println("#===========================================================#");
 			System.out.println("");
 			System.out.print("Please choose a selection: ");
@@ -60,7 +62,20 @@ public class BSTRunner {
 				System.out.println("Postorder: " + tree.postOrder());
 			if (menu == 5)
 				System.out.println("Removal coming soon!");
-		} while (menu != 6);
+			if (menu == 6) {
+				System.out.println("What is the value you want to find?");
+				String s1 = input.next();
+				boolean result = tree.search(s1);
+				if (result == true)
+					System.out.println("The value \"" + s1 + "\" was found in the tree!");
+				else
+					System.out.println("The value \"" + s1 + "\" was not found in the tree!");
+			}
+			if (menu == 7) {
+				int result = tree.countLeaf();
+				System.out.println("The tree has " + result + " leaf(s).");
+			}
+		} while (menu != 8);
 	}
 
 }
