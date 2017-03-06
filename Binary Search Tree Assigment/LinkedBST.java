@@ -66,8 +66,62 @@ public class LinkedBST {
 		}
 		return false;
 	}
-	public boolean removeNode(Comparable Obj) {
-		if ()
+	public boolean removeNode(Comparable find) {
+		//if tree is empty
+		if (root == null)
+			return false;
+		//calls private method
+		TreeNode test = delete(root, find);
+		if (test == null)
+			return false;
+		else
+			return true;
+	}
+	private TreeNode delete(TreeNode current, Comparable find) {
+	    if (current == null) 
+	    	return null;
+	    //if found the node to delete
+	    if (find.equals(current.getValue())) {
+	       //tests if removing node(and empty left & right)
+		   if (current.getLeft() == null && current.getRight() == null && current == root) {
+			   root = null;
+		   	   return current;
+		   }
+		   //tests if leaf
+	       if (current.getLeft() == null && current.getRight() == null) 
+	    	   return null;
+	       //test cases for 1 child
+	       if (current.getLeft() == null) 
+	    	   return current.getRight();
+	       if (current.getRight() == null) 
+	    	   return current.getLeft();
+	       //Case for 2 children
+	       //finds smallest value of the right subtree
+	       TreeNode temp = findSmall(current.getRight());
+	       //copy value
+	       current.setValue(temp.getValue());
+	       //delete temp
+	       current.setRight(delete(current.getRight(), (Comparable) temp.getValue()) );
+	       return current;
+	       
+	    }
+	    //if to check left
+	    else if (find.compareTo(current.getValue()) < 0) {
+	        current.setLeft(delete(current.getLeft(), find) );
+	        return current;
+	    }
+	    //check right
+	    else {
+	        current.setRight(delete(current.getRight(), find) );
+	        return current;
+	    }
+	}
+	//finds smallest value of the right subtree
+	private TreeNode findSmall(TreeNode current) {
+	    if (current.getLeft() == null) 
+	    	return current;
+	    else 
+	    	return findSmall(current.getLeft());
 	}
 	public boolean search(Comparable Key) {
 		boolean result = search(root, Key);
@@ -88,16 +142,44 @@ public class LinkedBST {
 		return count;
 	}
 	private int countLeaf(TreeNode current) {
+		//if the node is null, returns 0
 		if (current == null)
 			return 0;
 		else {
+			//if it's a leaf, returns 1
 			if (current.getLeft() == null && current.getRight() == null)
 				return 1;
+			//else, looks both left and right for leaves
 			else
 				return countLeaf(current.getLeft()) + countLeaf(current.getRight());
 		}
 	}
-	
+	public int findPath(Comparable find) {
+		//calls the private method
+		int result = findPath(root, find);
+		//if it's negative, returns -1
+		if (result < 0)
+			return -1;
+		//else, return result
+		else
+			return result;
+	}
+	private int findPath(TreeNode current, Comparable find) {
+		//test if the node is found
+		if (find.equals(current.getValue())) {
+			return 0;
+		} else if (find.compareTo(current.getValue()) < 0) {
+			if (current.getLeft() != null) //tests if in tree
+				return 1 + findPath(current.getLeft(), find); //adds 1
+			else // node is not in tree
+				return -99999;
+		} else {
+			if (current.getRight() != null) //tests if in tree
+				return 1 + findPath(current.getRight(), find); //adds 1
+			else //node is not in tree
+				return -99999;
+		}
+	}
 	/* preOrder */
 	/* Calls the recusive method
 	 * Also creats the ArrayList that will store the values
