@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class BSTRunner {
+public class LinkedBSTRunner {
     private static Scanner input = new Scanner(System.in); 
 	public static void main(String[] args) {
 		List display = new ArrayList();
