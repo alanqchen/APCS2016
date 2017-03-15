@@ -130,4 +130,3 @@ public class HeapPriorityQueue implements MaxPriorityQueue{
 		return s1;
 	}
 }
-
