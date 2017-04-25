@@ -1,4 +1,4 @@
-
+package alan.chen.compsci;
 import java.util.Scanner;
 public class APMatrix {
 	//Scanner for input
@@ -153,5 +153,30 @@ public class APMatrix {
 	    }
 	     //returns result
 	    return finalmatrix;
+	}
+	public int[][] getDiagonals() {
+		int[][] result;
+		if(MainMatrix.length != MainMatrix[0].length) {
+			System.out.println("ERROR: Matrix is not a square");
+			result = new int[1][1];
+			result[0][0] = 1738;
+			return result;
+		} else {
+			result = new int[2][MainMatrix[0].length];
+			for (int i = 0; i < MainMatrix.length; i++) {
+				for (int j = 0; j < MainMatrix[0].length; j++) {
+					if(i == j)
+						result[0][j] = MainMatrix[i][j];
+				}
+			}
+			int row = 0;
+			int col = MainMatrix[0].length - 1;
+			while(col >= 0) {
+				result[1][row] = MainMatrix[row][col];
+				col--;
+				row++;
+			}
+			return result;
+		}
 	}
 }
