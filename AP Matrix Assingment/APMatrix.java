@@ -1,4 +1,5 @@
 package alan.chen.compsci;
+import java.util.LinkedList;
 import java.util.Scanner;
 public class APMatrix {
 	//Scanner for input
@@ -179,4 +180,33 @@ public class APMatrix {
 			return result;
 		}
 	}
+	public int convertToBase10(int row, int col, int oldBase) {
+		int result = 0;
+		if (row > MainMatrix.length || col > MainMatrix[0].length) {
+			return 420;
+		}
+		int number = MainMatrix[row][col];
+		LinkedList<Integer> stack = new LinkedList<Integer>();
+		while (number > 0) {
+		    stack.push( number % 10 );
+		    number = number / 10;
+		}
+		int[] array = new int[stack.size()];
+		int index = 0;
+		while (!stack.isEmpty()) {
+		    array[index] = stack.pop();
+		    index++;
+		}
+		for (int a : array) {
+			if (a > oldBase) {
+				return -1;
+			}
+		}
+		for(int i = array.length - 1; i >= 0; i--)
+		{
+		    result += array[i] * Math.pow(oldBase, array.length-i-1); 
+		}
+		return result;
+	}
 }
+
