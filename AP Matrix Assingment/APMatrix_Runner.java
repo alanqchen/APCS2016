@@ -1,4 +1,5 @@
 package alan.chen.compsci;
+
 import java.io.IOException;
 import java.util.Scanner;
 public class APMatrix_Runner {
@@ -17,7 +18,8 @@ public class APMatrix_Runner {
 			System.out.println("|7. Remove Cross              |");
 			System.out.println("|8. Get Diagonals             |");
 			System.out.println("|9. Convert to base           |");
-			System.out.println("|10. Quit                     |");
+			System.out.println("|10. Joke                     |");
+			System.out.println("|11. Quit                     |");
 			System.out.println("#=============================#");
 			System.out.print("Please choose a selection: ");
 			menu = input.nextInt();
@@ -106,11 +108,22 @@ public class APMatrix_Runner {
 						for(int j = 0; j < test2[0].length; j++) {
 							System.out.println(test2[i][j]);
 						}
-					}
-					
-					System.out.println(test2.toString());
+					}			
 				}
-		}while (menu != 10);
+				if (menu == 9) {
+					int [] [] test1 = {{2134,2,1101,99},{8,2,132,3},{3,2,4,6}};
+					APMatrix m = new APMatrix(test1);
+					System.out.println(m.convertToBase10(0, 0, 5));
+					System.out.println(m.convertToBase10(1, 2, 4));
+					System.out.println(m.convertToBase10(3, 2, 4));
+					System.out.println(m.convertToBase10(0, 3, 7));
+				}
+				if (menu == 10) {
+					int[][] test = {{1},{2}};
+					APMatrix joke = new APMatrix(test);
+					joke.makeMeLaugh();
+				}
+		}while (menu != 11);
 	}
 	private static void Pause() {
 		System.out.println("Press ENTER to continue...");
@@ -120,3 +133,4 @@ public class APMatrix_Runner {
 		}
 	}
 }
+
