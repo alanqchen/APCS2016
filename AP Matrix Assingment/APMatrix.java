@@ -156,7 +156,9 @@ public class APMatrix {
 	    return finalmatrix;
 	}
 	public int[][] getDiagonals() {
+		//result array
 		int[][] result;
+		//check if it's a square
 		if(MainMatrix.length != MainMatrix[0].length) {
 			System.out.println("ERROR: Matrix is not a square");
 			result = new int[1][1];
@@ -164,12 +166,14 @@ public class APMatrix {
 			return result;
 		} else {
 			result = new int[2][MainMatrix[0].length];
+			//top-left to bottom-right diagonal
 			for (int i = 0; i < MainMatrix.length; i++) {
 				for (int j = 0; j < MainMatrix[0].length; j++) {
 					if(i == j)
 						result[0][j] = MainMatrix[i][j];
 				}
 			}
+			//top-right to bottom-left diagonal
 			int row = 0;
 			int col = MainMatrix[0].length - 1;
 			while(col >= 0) {
@@ -177,36 +181,93 @@ public class APMatrix {
 				col--;
 				row++;
 			}
+			//return result
 			return result;
 		}
 	}
 	public int convertToBase10(int row, int col, int oldBase) {
+		//int that store the result
 		int result = 0;
-		if (row > MainMatrix.length || col > MainMatrix[0].length) {
+		//checks if in bounds
+		if (row >= MainMatrix.length || col >= MainMatrix[0].length) {
 			return 420;
 		}
-		int number = MainMatrix[row][col];
+		//gets value in matrix
+		int num = MainMatrix[row][col];
+		//creates stack
 		LinkedList<Integer> stack = new LinkedList<Integer>();
-		while (number > 0) {
-		    stack.push( number % 10 );
-		    number = number / 10;
+		//splits the number into digits and places them into a stack
+		while (num > 0) {
+		    stack.push( num % 10 );
+		    num = num / 10;
 		}
+		//moves digits to a array
 		int[] array = new int[stack.size()];
 		int index = 0;
 		while (!stack.isEmpty()) {
 		    array[index] = stack.pop();
 		    index++;
 		}
+		//converts to base 10
 		for (int a : array) {
+			//checks if old base is possible
 			if (a > oldBase) {
 				return -1;
 			}
 		}
+		//adds up the result
 		for(int i = array.length - 1; i >= 0; i--)
 		{
 		    result += array[i] * Math.pow(oldBase, array.length-i-1); 
 		}
 		return result;
 	}
+	public void makeMeLaugh() {
+		String jokeS = "";
+		jokeS += "\n";
+		jokeS += "SHORT JOKE";
+		jokeS += "\n";
+		jokeS += "===========================";
+		jokeS += "\n";
+		jokeS += "\n";
+		jokeS += "\"[\"hip\",\"hip\"]\"";
+		jokeS += "\n";
+		jokeS += "(hip hip array!)";
+		jokeS += "\n";
+		System.out.println(jokeS);
+		
+		String jokeL = "";
+		jokeL += "LONG JOKE";
+		jokeL += "\n";
+		jokeL += "===========================";
+		jokeL += "\n";
+		jokeL+= "\n";
+		jokeL += "A man flying in a hot air balloon suddenly realizes he’s lost. He reduces height and spots a man down below. He lowers the balloon further and shouts to get directions, \"Excuse me, can you tell me where I am?\"";
+		jokeL += "\n";
+		jokeL += "\n";
+		jokeL += "The man below says: \"Yes. You're in a hot air balloon, hovering 30 feet above this field.\"";
+		jokeL += "\n";
+		jokeL += "\n";
+		jokeL += "\"You must work in Information Technology,\" says the balloonist.";
+		jokeL += "\n";
+		jokeL += "\n";
+		jokeL += "\"I do\" replies the man. \"How did you know?\"";
+		jokeL += "\n";
+		jokeL += "\n";
+		jokeL += "\"Well,\" says the balloonist, \"everything you have told me is technically correct, but it's of no use to anyone.\"";
+		jokeL += "\n";
+		jokeL += "\n";
+		jokeL += "The man below replies, \"You must work in management.\"";
+		jokeL += "\n";
+		jokeL += "\n";
+		jokeL += "\"I do,\" replies the balloonist, \"But how'd you know?\"";
+		jokeL += "\n";
+		jokeL += "\n";
+		jokeL += "\"Well\", says the man, \"you don’t know where you are or where you’re going, but you expect me to be able to help. You’re in the same position you were before we met, but now it’s my fault.\"";
+		jokeL += "\n";
+		System.out.println(jokeL);
+		System.out.println("\n***Disclamer: not original jokes***\n");
+	}
 }
+
 
