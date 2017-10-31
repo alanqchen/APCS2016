@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *   \ \  \____\ \  \ \  \ \  \_|\ \ \  \\ \  \ 
  *    \ \_______\ \__\ \__\ \_______\ \__\\ \__\
  *     \|_______|\|__|\|__|\|_______|\|__| \|__|
- * StringObk.java                                             
+ * StringObj.java                                             
  * Does stuff with Strings :)                                        
  * 
  */
